@@ -1,0 +1,35 @@
+
+public class SubsetTest1 {
+	static int[] p = {1, 2, 3, 4, 5};
+	static int N;
+	static boolean[] visited;
+	static int count;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		N = p.length;
+		visited=new boolean[N];
+		count = 0;
+		
+		perm(0, 0, 1);
+		System.out.println(count);
+	}
+	
+	static void perm(int cnt, int tot, int mul) {
+		if(cnt == N) {
+			for(int i = 0; i < N; i++)
+				if(visited[i])
+					System.out.print(p[i] + " ");
+			System.out.println();
+			System.out.println(tot + "  "+mul);
+			System.out.println("--------------------------");
+			count++;
+			return ;
+		}
+		
+		visited[cnt] = true;
+		perm(cnt + 1, tot + p[cnt], mul * p[cnt]);
+		visited[cnt] = false;
+		perm(cnt + 1, tot, mul);
+	}
+}
